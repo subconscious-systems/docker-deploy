@@ -11,7 +11,13 @@ and picks the tensor-parallel (TP) size and memory settings for you.
 - **Software.** An NVIDIA driver plus the
   [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html),
   so that `docker run --gpus` works.
-- **Registry access.** If the `subconsciouslabs/orangeline` repository is private, and we will share the api key separately.
+- **Docker Hub login.** The `subconsciouslabs/orangeline-dell` repository is private. Log in
+  once on each host before the first launch, with username `subconsciouslabs` and the access
+  token we share with you as the password:
+  ```bash
+  docker login -u subconsciouslabs    # paste the token at the password prompt
+  ```
+  Without it, `launch.sh` stops with `pull access denied ... may require 'docker login'`.
 - **Model weights.** One of:
   - a Hugging Face cache that holds `Qwen/Qwen3.6-27B`, or network access plus `HF_TOKEN` so the
     server can download it (about 55 GB);

@@ -10,6 +10,16 @@ subfolder targets one GPU type and holds its own guide (`README.md`) and launch 
 
 ## Quick start
 
+The images are private, so log in to Docker Hub first, once per host. The username is
+`subconsciouslabs`; the password is the access token we share with you:
+
+```bash
+docker login -u subconsciouslabs                                       # paste the token at the password prompt
+echo "$DOCKER_TOKEN" | docker login -u subconsciouslabs --password-stdin   # or non-interactively
+```
+
+Then start the server:
+
 ```bash
 cd h100
 ./launch.sh                      # uses every GPU on the host
@@ -38,8 +48,9 @@ All deployments need:
   If `docker run` fails with `could not select device driver "" with capabilities: [[gpu]]`,
   the toolkit is missing or not registered with Docker:
   `sudo nvidia-ctk runtime configure --runtime=docker && sudo systemctl restart docker`.
-- **Access to the `subconsciouslabs` images on Docker Hub.** The repositories are private;
-  run `docker login` with the credentials we share before the first launch.
+- **A Docker Hub login.** The `subconsciouslabs` repositories are private, so run
+  `docker login` (see [Quick start](#quick-start)) before the first launch. Without it,
+  `docker run` stops with `pull access denied ... may require 'docker login'`.
 - **Model weights**, either in a Hugging Face cache on the host or in a local directory.
   Each folder's README gives the details.
 
